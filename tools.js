@@ -7,6 +7,10 @@
 
  ;(function(){
  	var tools = function(){
+
+ 		// 备份对象
+ 		var thiz = this;
+
  		// 打印函数（mark参数是打印标记）
  		this.log = function(mark,msg){
  			var mk = "";
@@ -84,7 +88,7 @@
 			var final = year+"年"+month+"月"+day+"日";
 			return final;
 		};
-		// 表单里文件上传
+		// 表单里文件上传（ajax方式）
 		this.upload = function(url,method,formData,callback){
 			if($){
 				if(formData){
@@ -107,6 +111,59 @@
 				this.log("upload","方法依赖jquery");
 			}
 		};
+		// 获取当前的url，域名等信息
+		this.getWebInfo = function(){
+			var info = {};
+			info.url = window.location.href;
+			info.protocol = window.location.protocol.split(":")[0];
+			info.host = window.location.host;
+			info.path = window.location.pathname;
+			info.params = window.location.search;
+			return info;
+		};
+		// 获取当前url上的指定参数
+		this.getWebParams = function(name){
+			var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+		    var r = window.location.search.substr(1).match(reg);
+		    if (r != null) {
+		        return unescape(r[2]);
+		    }
+		    return null;
+		};
+		// 校验手机号码
+		this.checkPhone = function(phone,callback){
+			// 判断输入号码是否有效
+		    if(!phone && phone.trim()){
+		        callback("您的手机号码是？");
+		        return false;
+		    }
+		    if(!(/^1[3|4|5|7|8][0-9]{9}$/.test(phone))){
+		        callback("请输入正确手机号码！");
+		        return false;
+		    }
+		    return true;
+		};
+		// 倒计时
+	    this.countDown = function(second,callback){
+		    var time = second;
+		    var id = null;
+		    this.countDown.stopCount = function(){
+		        if(id){
+		          	window.clearInterval(id);
+		          	thiz.log("countDown","已停止倒计时！");
+		        }
+		    };
+		    if(time>0 && !id){
+		       	id = setInterval(function(){
+		         	time --;
+		          	if(callback){callback(time);}
+		          	if(time == 0){
+		            	window.clearInterval(id);
+		          	}
+		        },1000);
+		    }
+	    };
+	    // 
  	};
     window.tools = tools;
  })();

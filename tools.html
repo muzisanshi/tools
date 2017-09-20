@@ -7,13 +7,26 @@
 <body>
 	<!-- getCookie -->
 	<p id="getCookie"></p>
+
+	<p>
+		<button id="count">点击倒计时</button>
+	</p>
 </body>
+<!-- tools依赖jquery -->
+<script type="text/javascript" src="resources/js/jquery-3.1.1.min.js"></script>
 <script type="text/javascript" src="tools.js"></script>
 <script type="text/javascript">
 
 	// init tools
 	var t = new tools();
 	t.log("tools","hello,world!");
-	
+
+	// test countDown
+	$("#count").click(function(){
+		t.countDown(5,function(time){
+			t.log("countDown",time);
+		});
+	});
+
 </script>
 </html>

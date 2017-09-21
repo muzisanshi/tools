@@ -18,6 +18,16 @@
  			var date = this.getDate();
  			console.log("["+date+"]  @"+mk+"  "+msg);
  		};
+ 		// 设置coookie
+ 		this.setCookie = function(name,value,milis){
+			var exp = new Date();
+			exp.setTime(exp.getTime() + milis);
+			if(milis){
+			    document.cookie = name + "="+ escape(value) + ";expires=" + exp.toGMTString()+";path=/";
+			}else{
+			    document.cookie = name + "="+ escape(value) + ";path=/";
+			}
+		}
 		// 获取指定cookie
 		this.getCookie = function(name){
 	        var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");

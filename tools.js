@@ -3,6 +3,7 @@
  * @author: 	李磊
  * @date: 		2017.9.19
  * @version: 	v1.0
+ * @contact:    QQ->1052048489 Email->1052048489@qq.com
  */
 
  ;(function(){
@@ -11,14 +12,38 @@
  		// 备份对象
  		var thiz = this;
 
- 		// 打印函数（mark参数是打印标记）
+ 		/**
+		 * @desc 打印函数
+		 * @params mark->打印标记 msg->打印内容
+ 		 */
  		this.log = function(mark,msg){
  			var mk = "";
  			if(mark){mk=mark;}
  			var date = this.getDate();
  			console.log("["+date+"]  @"+mk+"  "+msg);
  		};
- 		// 设置coookie
+
+ 		/**
+		 * @desc 监听回车事件
+		 * @params callback->执行回调
+		 * @note 该函数依赖jQuery
+ 		 */
+ 		this.listenEnter = function(callback){
+ 			if($){
+	 			$(document).keydown(function(event){
+		            if(event.keyCode == 13) {  
+		            	callback();
+		            } 
+		        });
+	        }else{
+				this.log("listenEnter","方法依赖jquery");
+			}
+ 		};
+
+ 		/**
+		 * @desc 设置coookie
+		 * @params name->cookie名字 value->cookie的值 milis->过期时间，单位ms
+ 		 */
  		this.setCookie = function(name,value,milis){
 			var exp = new Date();
 			exp.setTime(exp.getTime() + milis);
@@ -28,7 +53,12 @@
 			    document.cookie = name + "="+ escape(value) + ";path=/";
 			}
 		}
-		// 获取指定cookie
+
+		/**
+		 * @desc 获取指定cookie
+		 * @params name->cookie名字
+		 * @return 指定cookie的值
+ 		 */
 		this.getCookie = function(name){
 	        var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
 	        if(arr=document.cookie.match(reg)){
@@ -37,7 +67,11 @@
 	            return null;
 	        }
 		};
-		// 删除指定cookie
+
+		/**
+		 * @desc 删除指定cookie
+		 * @params name->cookie名字
+ 		 */
 		this.delCookie = function(name){
 	        var exp = new Date();
 	        exp.setTime(exp.getTime() - 1000);
@@ -46,7 +80,12 @@
 	            document.cookie= name + "="+cval+";expires="+exp.toGMTString()+";path=/";
 	        }
 	    };
-	    // 把年月日时分秒转为时间戳（参数格式：yy-mm-dd hh:mm:ss）
+
+	    /**
+		 * @desc 把年月日时分秒转为时间戳（参数格式：yy-mm-dd hh:mm:ss）
+		 * @params date->日期
+		 * @return 时间戳，单位s
+ 		 */
 	    this.getTimeStamp = function(date){
 			if(date){
 				var stamp = parseInt(Date.parse(new Date(date))/1000);
@@ -54,9 +93,11 @@
 			}
 			return null;
 		};
+
 		/**
-		 * 把时间戳转换为年月日时分秒（返回格式：yy-mm-dd hh:mm:ss），如果
-		 * 参数为空，返回当前日期
+		 * @desc 把时间戳转换为年月日时分秒（返回格式：yy-mm-dd hh:mm:ss）
+		 * @params stamp->日期，单位s
+		 * @return 格式化后的日期，如果参数为空，返回当前日期
 		 */
 		this.getDate = function(stamp){
 			var date = new Date();
@@ -88,7 +129,11 @@
 			var final = year+"-"+month+"-"+day+" "+hour+":"+minute+":"+second;
 			return final;
 		};
-		// 获取当前日期（返回格式：yy年mm月dd日）
+
+		/**
+		 * @desc 获取当前日期（返回格式：yy年mm月dd日）
+		 * @return 格式化后的日期
+		 */
 		this.getCurDateShort = function(){
 			var date = new Date();
 			var year = date.getFullYear();
@@ -98,7 +143,12 @@
 			var final = year+"年"+month+"月"+day+"日";
 			return final;
 		};
-		// 表单里文件上传（ajax方式）
+
+		/**
+		 * @desc 表单里文件上传（ajax方式）
+		 * @params url->上传地址 method->请求方法 formData->文件表单数据，类型是FormData callback->执行回调
+		 * @note 该函数依赖jQuery
+		 */
 		this.upload = function(url,method,formData,callback){
 			if($){
 				if(formData){
@@ -121,7 +171,11 @@
 				this.log("upload","方法依赖jquery");
 			}
 		};
-		// 获取当前的url，域名等信息
+
+		/**
+		 * @desc 获取当前的url，域名等信息
+		 * @return 返回url，域名等信息，类型是对象
+		 */
 		this.getWebInfo = function(){
 			var info = {};
 			info.url = window.location.href;
@@ -131,7 +185,12 @@
 			info.params = window.location.search;
 			return info;
 		};
-		// 获取当前url上的指定参数
+
+		/**
+		 * @desc 获取当前url上的指定参数
+		 * @params name->指定参数名字
+		 * @return 返回url，域名等信息，类型是对象
+		 */
 		this.getWebParams = function(name){
 			var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
 		    var r = window.location.search.substr(1).match(reg);
@@ -140,20 +199,41 @@
 		    }
 		    return null;
 		};
-		// 校验手机号码
-		this.checkPhone = function(phone,callback){
+
+		/**
+		 * @desc 校验手机号码
+		 * @params phone->手机号码
+		 * @return 检验是否成功
+		 */
+		this.checkPhone = function(phone){
 			// 判断输入号码是否有效
 		    if(!phone && phone.trim()){
-		        callback("您的手机号码是？");
 		        return false;
 		    }
 		    if(!(/^1[3|4|5|7|8][0-9]{9}$/.test(phone))){
-		        callback("请输入正确手机号码！");
 		        return false;
 		    }
 		    return true;
 		};
-		// 倒计时
+
+		/**
+		 * @desc 校验邮箱格式
+		 * @params email->邮箱
+		 * @return 检验是否成功
+		 */
+		function checkEmail(email){
+		　　var myReg=/^[a-zA-Z0-9_-]+@([a-zA-Z0-9]+\.)+(com|cn|net|org)$/;
+		　　if(myReg.test(email)){
+		　　　　return true;
+		　　}else{
+		　　　　return false;
+			}
+		}
+
+		/**
+		 * @desc 倒计时
+		 * @params second->倒计时秒数 callback->执行回调
+		 */
 	    this.countDown = function(second,callback){
 		    var time = second;
 		    var id = null;
@@ -173,7 +253,6 @@
 		        },1000);
 		    }
 	    };
-	    // 
  	};
     window.tools = tools;
  })();

@@ -1,0 +1,28 @@
+/**
+ * @desc:      一个常用样式的库
+ * @author:    李磊
+ * @date:      2017.9.19
+ * @version:   v1.0
+ * @contact:   QQ->1052048489 Email->1052048489@qq.com
+ */
+
+/*示例渐变色，可根据实际需要修改*/
+.gradient{
+     /*低版本IE*/
+     filter:alpha(opacity=100 finishopacity=100 style=1 startx=0,starty=0,finishx=100,finishy=0) progid:DXImageTransform.Microsoft.gradient(startcolorstr='#ff0000',endcolorstr='#0000ff',gradientType=1);/*IE7*/
+     -ms-filter:alpha(opacity=100 finishopacity=100 style=1 startx=0,starty=0,finishx=100,finishy=0) progid:DXImageTransform.Microsoft.gradient(startcolorstr='#ff0000',endcolorstr='#0000ff',gradientType=1);/*IE8*/
+     /*高版本IE*/
+     background: -ms-linear-gradient(top, rgba(255, 0, 0, 1),rgba(0, 0, 255, 1));/*IE9*/
+     /*firefox*/
+     background:-moz-linear-gradient(top, rgba(255, 0, 0, 1), rgba(0, 0, 255, 1));
+     /*低版本webkit*/
+     background:-webkit-gradient(linear, left top, right top, from(rgba(255, 0, 0, 1)), to(rgba(0, 0, 255, 1)));
+     /*高版本webkit*/
+     background:-webkit-linear-gradient(top, rgba(255, 0, 0, 1), rgba(0, 0, 255, 1));
+     /*opra*/
+     background:-o-linear-gradient(top, rgba(255, 0, 0, 1), rgba(0, 0, 255, 1));
+     /*不支持的浏览器*/
+     background:white;
+}
+
+

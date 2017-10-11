@@ -1,3 +1,12 @@
+<!-- 
+/**
+ * @desc:      测试页面
+ * @author:    李磊
+ * @date:      2017.9.19
+ * @version:   v1.0
+ * @contact:   QQ->1052048489 Email->1052048489@qq.com
+ */
+ -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,11 +17,14 @@
 	
 	<!-- getCookie -->
 	<p id="getCookie"></p>
-
+	
 	<!-- countDown -->
 	<p>
 		<button id="count">点击倒计时</button>
 	</p>
+
+	<div id="gtest" style="width: 100px;height: 50px;"></div>
+	<div id="gtest2" style="width: 100px;height: 50px;margin-top: 20px;"></div>
 
 </body>
 <!-- tools依赖jquery -->
@@ -30,6 +42,14 @@
 			t.log("countDown",time);
 		});
 	});
+
+	// test hex2Rgb
+	var result = t.hex2Rgb("#ff0");
+	t.log("hex2Rgb",result);
+
+	// test gradient
+	t.gradient("gtest","lr","#ff0000","#0000ff",1,0.2);
+	t.gradient("gtest2","tb","#ff0000","#0000ff",1,0.2);
 
 </script>
 </html>

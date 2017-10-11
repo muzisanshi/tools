@@ -1,9 +1,9 @@
 /**
- * @desc: 		一个常用工具函数的库
- * @author: 	李磊
- * @date: 		2017.9.19
- * @version: 	v1.0
- * @contact:    QQ->1052048489 Email->1052048489@qq.com
+ * @desc:      一个常用工具函数的库
+ * @author:    李磊
+ * @date:      2017.9.19
+ * @version:   v1.0
+ * @contact:   QQ->1052048489 Email->1052048489@qq.com
  */
 
  ;(function(){
@@ -33,7 +33,7 @@
 	 			$(document).keydown(function(event){
 		            if(event.keyCode == 13) {  
 		            	callback();
-		            } 
+		            }
 		        });
 	        }else{
 				this.log("listenEnter","方法依赖jquery");
@@ -253,6 +253,103 @@
 		        },1000);
 		    }
 	    };
+
+	    /**
+		 * @desc 十六进制颜色转为RGB
+		 * @params hex->16进制颜色值（#ffffff或者#fff）
+		 */
+	    this.hex2Rgb = function(hex){
+	    	// 定义rgb数组
+			var rgb = [];
+			//判断传入是否为#三位十六进制数
+			if (/^\#[0-9A-F]{3}$/i.test(hex)) {
+			  	var sixHex = "#";
+				hex.replace(/[0-9A-F]/ig, function(kw) {
+					//把三位16进制数转化为六位
+					sixHex += kw + kw;
+				});
+				//保存回hex
+				hex = sixHex;
+			}
+			//判断传入是否为#六位十六进制数
+			if (/^#[0-9A-F]{6}$/i.test(hex)) {
+			  	hex.replace(/[0-9A-F]{2}/ig,function(kw) {
+			  		//十六进制转化为十进制并存如数组
+			   		rgb.push(eval("0x" + kw));
+			  	});
+
+			  	//输出RGB格式颜色
+			  	return "rgb("+rgb[0]+","+rgb[1]+","+rgb[2]+")";
+			}
+			return null;
+		}
+
+	    /**
+		 * @desc 设置元素的背景渐变色（适用于设置数量少的渐变色，不然性能不好）
+		 * @params eleId->元素ID direction->渐变方向（从左往右：lr；从上往下：tb）
+		 * 		   startColor->起始颜色值（十六进制） stopColor->结束颜色值（同上） startAlpha->起始透明度（0~1）
+		 *	       stopAlpha->结束透明度（0~1）
+		 * @note 该函数依赖jQuery
+		 */
+		this.gradient = function(eleId,direction,startColor,stopColor,startAlpha,stopAlpha){
+		 	function transColor(hex){
+		    	// 定义rgb数组
+				var rgb = [];
+				//判断传入是否为#三位十六进制数
+				if (/^\#[0-9A-F]{3}$/i.test(hex)) {
+				  	var sixHex = '#';
+					hex.replace(/[0-9A-F]/ig, function(kw) {
+						//把三位16进制数转化为六位
+						sixHex += kw + kw;
+					});
+					//保存回hex
+					hex = sixHex;
+				}
+				//判断传入是否为#六位十六进制数
+				if (/^#[0-9A-F]{6}$/i.test(hex)) {
+				  	hex.replace(/[0-9A-F]{2}/ig,function(kw) {
+				  		//十六进制转化为十进制并存如数组
+				   		rgb.push(eval('0x' + kw));
+				  	});
+
+				  	//输出RGB格式颜色
+				  	return rgb[0]+','+rgb[1]+','+rgb[2];
+				}
+				return '255,255,255';
+			};
+		 	if($){
+		 		var ele = $("#"+eleId);
+		 		var directionType = direction=="lr"?1:0;
+		 		var trStartColor = transColor(startColor);
+		 		var trStopColor = transColor(stopColor);
+		 		var startPoint = direction=="lr"?"left":"top";
+		 		var startPoint2 = direction=="lr"?"left top,right top":"left top,left bottom";
+		 		var finishx = direction=="lr"?ele.width():0;
+		 		var finishy = direction=="lr"?0:ele.height();
+		 		var claz = direction=="lr"?"g-hor":"g-ver";
+		 		var id = $(".gradient").length;
+		 		var cssEle = "<style type='text/css' class='gradient' id='"+id+"'>"+
+		 						"."+claz+id+"{"+
+			    				 	"background:white;"+
+			    				 	"filter:alpha(opacity="+startAlpha*100+" finishopacity="+stopAlpha*100+" style=1 startx=0,starty=0,finishx="+finishx+",finishy="+finishy+") progid:DXImageTransform.Microsoft.gradient(startcolorstr='"+startColor+"',endcolorstr='"+stopColor+"',gradientType="+directionType+");"+
+			    				 	"-ms-filter:alpha(opacity="+startAlpha*100+" finishopacity="+stopAlpha*100+" style=1 startx=0,starty=0,finishx="+finishx+",finishy="+finishy+") progid:DXImageTransform.Microsoft.gradient(startcolorstr='"+startColor+"',endcolorstr='"+stopColor+"',gradientType="+directionType+");"+
+			    				 	"background:-ms-linear-gradient("+startPoint+",rgba("+trStartColor+","+startAlpha+"),rgba("+trStopColor+","+stopAlpha+"));"+
+			    				 	"background:-webkit-gradient(linear,"+startPoint2+",from(rgba("+trStartColor+","+startAlpha+")), to(rgba("+trStopColor+","+stopAlpha+")));"+
+			    				 	"background:-webkit-linear-gradient("+startPoint+",rgba("+trStartColor+","+startAlpha+"),rgba("+trStopColor+","+stopAlpha+"));"+
+			    				 	"background:-moz-linear-gradient("+startPoint+",rgba("+trStartColor+","+startAlpha+"),rgba("+trStopColor+","+stopAlpha+"));"+
+			    				 	"background:-o-linear-gradient("+startPoint+",rgba("+trStartColor+","+startAlpha+"),rgba("+trStopColor+","+stopAlpha+"));"+
+			    				"}"+
+		 					 "</style>";
+		 		// 往head中写样式
+		 		$("head").append($(cssEle));
+		 		// 给元素添加class
+		 		ele.addClass(claz+id);
+		 	}else{
+		 		this.log("gradient","方法依赖jquery");
+		 	}
+		};
+
+		// 等待着新的工具...
  	};
     window.tools = tools;
  })();

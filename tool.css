@@ -6,6 +6,26 @@
  * @contact:   QQ->1052048489 Email->1052048489@qq.com
  */
 
+/*
+ * 重置浏览器默认样式
+ */
+*{margin: 0px;padding: 0px;}
+/*去除按钮的默认边框和背景等，以及webkit上的点击效果*/
+button{outline: none;border: none;border-radius:none;background-color: transparent;background: transparent;-webkit-tap-highlight-color:rgba(0,0,0,0);}
+/*去除输入框的默认边框和背景等，以及webkit上的点击效果*/
+input[type=text],input[type=password]{outline: none;border: none;border-radius:none;-webkit-tap-highlight-color:rgba(0,0,0,0);}
+/*去除输入框上的删除按钮*/
+input::-webkit-search-cancel-button{display: none;}
+/*禁止textarea伸缩*/
+textarea{resize: none;}
+
+/*垂直居中（兼容IE、webkit、mozila）*/
+.c-ver{display: -webkit-box;-webkit-box-align: center;display: -ms-flexbox;-ms-flex-align: center;display: -moz-box;-moz-box-align: center;}
+/*水平居中（兼容IE、webkit、mozila）*/
+.c-hor{display: -webkit-box;-webkit-box-pack: center;display:-ms-flexbox;-ms-flex-pack:center;display: -moz-box;-moz-box-pack: center;}
+/*居中（兼容IE、webkit、mozila）*/
+.center{display: -webkit-box;-webkit-box-pack: center;-webkit-box-align: center;display:-ms-flexbox;-ms-flex-pack:center;-ms-flex-align:center;display:-moz-box;-moz-box-pack:center;-moz-box-align:center;}
+
 /*示例渐变色，可根据实际需要修改*/
 .gradient{
      /*低版本IE*/
@@ -24,5 +44,7 @@
      /*不支持的浏览器*/
      background:white;
 }
+
+
 
 

@@ -283,7 +283,7 @@
 			}
 			return null;
 		}
-
+		
 	    /**
 		 * @desc 设置元素的背景渐变色（适用于设置数量少的渐变色，不然性能不好）
 		 * @params eleId->元素ID direction->渐变方向（从左往右：lr；从上往下：tb）

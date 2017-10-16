@@ -231,6 +231,22 @@
 		}
 
 		/**
+		 * @desc 校验身份证格式
+		 * @params idnum->身份证号码
+		 * @return 检验是否成功
+		 */
+		this.checkIdnum = function(idnum){
+	    	if(!idnum){
+	    		return false;
+	    	}
+	    	var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+	    	if(!reg.test(idnum)){
+	    		return false;
+	    	}
+	    	return true;
+	    };
+
+		/**
 		 * @desc 倒计时
 		 * @params second->倒计时秒数 callback->执行回调
 		 */

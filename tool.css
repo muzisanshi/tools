@@ -20,11 +20,11 @@ input::-webkit-search-cancel-button{display: none;}
 textarea{resize: none;}
 
 /*垂直居中（兼容IE、webkit、mozila）*/
-.c-ver{display: -webkit-box;-webkit-box-align: center;display: -ms-flexbox;-ms-flex-align: center;display: -moz-box;-moz-box-align: center;}
+.c-ver{display: -webkit-box;-webkit-box-align: center;display: -ms-flexbox;-ms-flex-align: center;display: -moz-box;-moz-box-align: center;display: -o-box;-o-box-align: center;}
 /*水平居中（兼容IE、webkit、mozila）*/
-.c-hor{display: -webkit-box;-webkit-box-pack: center;display:-ms-flexbox;-ms-flex-pack:center;display: -moz-box;-moz-box-pack: center;}
+.c-hor{display: -webkit-box;-webkit-box-pack: center;display:-ms-flexbox;-ms-flex-pack:center;display: -moz-box;-moz-box-pack: center;display: -o-box;-o-box-pack: center;}
 /*居中（兼容IE、webkit、mozila）*/
-.center{display: -webkit-box;-webkit-box-pack: center;-webkit-box-align: center;display:-ms-flexbox;-ms-flex-pack:center;-ms-flex-align:center;display:-moz-box;-moz-box-pack:center;-moz-box-align:center;}
+.center{display: -webkit-box;-webkit-box-pack: center;-webkit-box-align: center;display:-ms-flexbox;-ms-flex-pack:center;-ms-flex-align:center;display:-moz-box;-moz-box-pack:center;-moz-box-align:center;display:-o-box;-o-box-pack:center;-o-box-align:center;}
 
 /*示例渐变色（可根据实际需要修改）*/
 .gradient{
@@ -64,6 +64,11 @@ textarea{resize: none;}
 　　-webkit-marquee-repetition:infinite; 　 /* 文字滚动次数 number | infinite ， infinite即无限次循环滚动 */
 }
 
+/*不选中文本*/
+.no-select{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;-o-user-select:none;user-select:none;}
+
+/*flex布局*/
+.flex{display: -webkit-flex;-webkit-box-flex: 1;display: -ms-flexbox;-ms-flex: 1;display: -moz-box;-moz-box-flex: 1;display: -o-box;-o-box-flex: 1;display: box;flex: 1;}
 
 
 

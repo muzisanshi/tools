@@ -30,6 +30,8 @@ input[type=text],input[type=password]{outline: none;border: none;border-radius:n
 input::-webkit-search-cancel-button{display: none;}
 /*禁止textarea伸缩*/
 textarea{resize: none;}
+iframe{border: none;}
+ul,li{list-style: none;}
 
 /*margin水平居中*/
 .m-cen{margin: 0 auto;}

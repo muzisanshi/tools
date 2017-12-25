@@ -24,6 +24,177 @@
  		};
 
  		/**
+		 * @desc 指定小数保留小数位数
+		 * @params num->要处理的小数 dec->保留的小数位数
+		 * @return 处理后的小数
+ 		 */
+ 		this.fixed = function(num,dec){
+ 			var result;
+ 			if(num!=null&&num!=undefined&&num!="" || num==0){
+ 				if(typeof num == "string"){
+ 					result = parseFloat(num).toFixed(dec);
+ 				}
+ 				if(typeof num == "number"){
+ 					result = num.toFixed(dec);
+ 				}
+ 			}
+ 			return result;
+ 		};
+
+ 		/**
+		 * @desc 把传入的内容转为数字
+		 * @params num->要转换的内容
+		 * @return 转换后的数字
+ 		 */
+ 		this.num = function(num){
+ 			var result;
+ 			if(num){
+ 				if(typeof num == "string"){
+ 					result = Number(num);
+ 				}
+ 				if(typeof num == "number"){
+ 					result = num;
+ 				}
+ 			}
+ 			return result;
+ 		};
+
+ 		/**
+		 * @desc 把传入的内容转为整数
+		 * @params num->要转换的内容
+		 * @return 转换后的数字
+ 		 */
+ 		this.int = function(num){
+ 			var result;
+ 			if(num){
+ 				if(typeof num == "string"){
+ 					result = Number(num);
+ 				}
+ 				if(typeof num == "number"){
+ 					result = num;
+ 				}
+ 				result = parseInt(result);
+ 			}
+ 			return result;
+ 		};
+
+ 		/**
+		 * @desc 截取多少位小数位数的小数
+		 * @params num->要截取的数字 dec->要截取的小数的位数
+		 * @return 转换后的数字
+ 		 */
+ 		this.cutDecimal = function(num,dec){
+ 			var result;
+ 			if(typeof decimal == "string"){
+ 				result = parseFloat(decimal).toFixed(dec+4);
+ 			}
+ 			if(typeof decimal == "number"){
+ 				result = parseFloat(decimal).toFixed(dec+4);
+ 			}
+ 			result = result+"";
+ 			var splits = result.split(".");
+ 			result = splits[0]+"."+splits[1].slice(0,dec);
+ 			return result;
+ 		};
+
+ 		/**
+		 * @desc 获取文件名
+		 * @params filePath->文件路径
+		 * @return 文件名（前缀加后缀）
+ 		 */
+		this.getFileName = function(filePath){
+			var result = null;
+			if(filePath){
+				var pathArr = filePath.split("/");
+                result = pathArr[pathArr.length - 1];
+
+			}
+			return result;
+		};
+
+ 		/**
+		 * @desc 转换秒为00:00:00显示格式
+		 * @params second->要转换的秒
+		 * @return 转换后的时间
+ 		 */
+ 		this.tranSecond = function(second){
+	    	var sec = second;
+	    	var hour = parseInt(sec / 3600);
+	    	if(hour<10){
+	    		hour = "0"+hour;
+	    	}
+	    	var min = parseInt((sec % 3600) / 60);
+	    	if(min<10){
+	    		min = "0"+min;
+	    	}
+	    	var secLast = parseInt((sec % 3600) % 60);
+	    	if(secLast<10){
+	    		secLast = "0"+secLast;
+	    	}
+	    	return hour+":"+min+":"+secLast;
+	    };
+
+	    /**
+		 * @desc 转换秒为 0天 00:00:00 显示格式
+		 * @params second->要转换的秒
+		 * @return 转换后的时间
+ 		 */
+	    this.tranSecond2 = function(second){
+	    	var sec = second;
+
+	    	// 天
+	    	var day = parseInt(sec/(3600*24));
+
+	    	var hour = parseInt(sec / 3600);
+	    	if(hour<10){
+	    		hour = "0"+hour;
+	    	}
+	    	var min = parseInt((sec % 3600) / 60);
+	    	if(min<10){
+	    		min = "0"+min;
+	    	}
+	    	var secLast = parseInt((sec % 3600) % 60);
+	    	if(secLast<10){
+	    		secLast = "0"+secLast;
+	    	}
+	    	return (day>0?(day+"天 "):"")+hour+":"+min+":"+secLast;
+	    };
+
+	    /**
+		 * @desc 监听输入框输入变化
+		 * @params input->要监听的元素的选择器（可以是数组） callback->执行回调
+		 * @note 该函数依赖jquery
+ 		 */
+	    this.keyup = function(input,callback){
+	    	if($){
+	    		if($ && typeof input == "string"){
+					$(input).on("keyup",function(e,t){
+						callback($(this).val());
+					});
+					return;
+				}
+				if($ && input instanceof Array){
+					for(var i=0;i<input.length;i++){
+						if(input[i].type){
+							var curInput = input[i];
+							$(input[i].ele).on("keyup",function(e,t){
+								callback({type:curInput.type,ele:curInput.ele,val:$(this).val()});
+							});
+						}else{
+							$(input[i]).on("keyup",function(e,t){
+								callback($(this).val());
+							});
+						}
+						
+					}
+					return;
+				}
+	    	}else{
+	    		this.log("listenEnter","方法依赖jquery");
+	    	}
+		};
+
+ 		/**
 		 * @desc 监听回车事件
 		 * @params callback->执行回调
 		 * @note 该函数依赖jQuery
@@ -52,7 +223,7 @@
 			}else{
 			    document.cookie = name + "="+ escape(value) + ";path=/";
 			}
-		}
+		};
 
 		/**
 		 * @desc 获取指定cookie
@@ -75,7 +246,7 @@
 		this.delCookie = function(name){
 	        var exp = new Date();
 	        exp.setTime(exp.getTime() - 1000);
-	        var cval=getCookie(name);
+	        var cval=this.getCookie(name);
 	        if(cval!=null){
 	            document.cookie= name + "="+cval+";expires="+exp.toGMTString()+";path=/";
 	        }
@@ -87,11 +258,21 @@
 		 * @return 时间戳，单位s
  		 */
 	    this.getTimeStamp = function(date){
-			if(date){
-				var stamp = parseInt(Date.parse(new Date(date))/1000);
-				return stamp;
-			}
-			return null;
+			var first = date.split(" ")[0];
+			var second = date.split(" ")[1];
+			var splits1 = first.split("-");
+			var splits2 = second.split(":");
+			var result = (new Date(parseInt(splits1[0]),parseInt(splits1[1]) - 1,parseInt(splits1[2]),parseInt(splits2[0]),parseInt(splits2[1]),parseInt(splits2[2]))).getTime();
+			return result/1000;
+		};
+
+		/**
+		 * @desc 获取当前日期的时间戳
+		 * @return 时间戳，单位s
+ 		 */
+		this.getCurStamp = function(){
+			var mili = (new Date()).getTime();
+			return mili/1000;
 		};
 
 		/**
@@ -207,7 +388,7 @@
 		 */
 		this.checkPhone = function(phone){
 			// 判断输入号码是否有效
-		    if(!phone && phone.trim()){
+		    if(!phone || !phone.trim()){
 		        return false;
 		    }
 		    if(!(/^1[3|4|5|7|8][0-9]{9}$/.test(phone))){
@@ -250,13 +431,13 @@
 		 * @desc 倒计时
 		 * @params second->倒计时秒数 callback->执行回调
 		 */
-	    this.countDown = function(second,callback){
+	    this.countD = function(second,callback){
 		    var time = second;
 		    var id = null;
-		    this.countDown.stopCount = function(){
+		    this.countD.stopCount = function(){
 		        if(id){
 		          	window.clearInterval(id);
-		          	thiz.log("countDown","已停止倒计时！");
+		          	thiz.log("countD","已停止倒计时！");
 		        }
 		    };
 		    if(time>0 && !id){
@@ -269,6 +450,187 @@
 		        },1000);
 		    }
 	    };
+
+	    /**
+		 * @desc 把版本号转换为整数，例如(1.0.1->101)
+		 * @params version->版本字符串
+		 * @return 版本号对应的整数
+		 */
+ 		this.getVerNum = function(version){
+ 			var result = "";
+ 			if(version){
+ 				var splits = version.split(".");
+ 				for(var i = 0;i<splits.length;i++){
+ 					result+=splits[i];
+ 				}
+ 				result = parseInt(result);
+ 			}
+ 			return result;
+ 		};
+
+ 		/**
+		 * @desc 遍历数字或者对象
+		 * @params target->要遍历的数组或者对象 callback->执行回调
+		 */
+		this.for = function(target,callback){
+ 			if(target instanceof Array){
+ 				for(var i = 0;i<target.length;i++){
+ 					var index2 = i;
+ 					thiz.log("index2",index2);
+ 					var ret = {};
+ 					ret.target = target;
+ 					ret.item = target[index2];
+ 					ret.index = index2;
+ 					callback(ret);
+ 				}
+ 				return;
+ 			}
+ 			if(target instanceof Object){
+ 				for(var key in target){
+ 					var key2 = key;
+ 					var ret = {};
+ 					ret.target = target;
+ 					ret.item = target[key2];
+ 					ret.key = key2;
+ 					callback(ret);
+ 				}
+ 			}
+ 		};
+
+ 		/**
+		 * @desc 删除数组中的某个字符串
+		 * @params arr->数组 value->要删除的值
+		 * @return 删除指定值后的数组
+		 */
+		this.deleteArrStr = function(arr,value){
+ 			var result = arr;
+ 			if(result instanceof Array){
+ 				for(var i=0;i<result.length;i++){
+ 					if(result[i]==value){
+ 						result.splice(i,1);
+ 					}
+ 				}
+ 			}
+ 			return result;
+ 		};
+
+ 		/**
+		 * @desc 把字符串转换为json对象或数组
+		 * @params json->json字符串
+		 * @return 转换后的对象或数组
+		 */
+ 		this.parse = function(json){
+ 			var result = null;
+ 			if(json && typeof json == "string"){
+ 				try{
+ 					result = JSON.parse(json);
+ 				}catch(e){
+ 					thiz.log("parse","解析异常！");
+ 				}
+ 			}else{
+ 				result = json;
+ 			}
+ 			return result;
+ 		};
+
+ 		/**
+		 * @desc 把json对象或数组转换为字符串
+		 * @params jsonObj->json数组或者对象
+		 * @return 转换后的json字符串
+		 */
+		this.jsonStr = function(jsonObj){
+ 			var result;
+ 			if(jsonObj instanceof Array || jsonObj instanceof Object){
+ 				try{
+ 					result = JSON.stringify(jsonObj);
+ 				}catch(e){
+ 					thiz.log("parse","解析异常！");
+ 				}
+ 			}
+ 			return result;
+ 		};
+
+ 		/**
+		 * @desc 切换样式
+		 * @params clickEle->点击的元素 claz->要切换的样式 targetEle->要切换样式的元素 callback->执行回调
+		 * @note 当targetEle为null的时候，默认clickEle是要切换样式的元素
+		 */
+ 		this.togClass = function(clickEle,claz,targetEle,callback){
+			if(clickEle && claz){
+				if($){
+					$(clickEle).click(function(){
+						var ftarget = clickEle;
+						if(targetEle){
+							ftarget=clickEle+" "+targetEle;
+							$(ftarget).removeClass(claz);
+							$(this).find(targetEle).addClass(claz);
+						}else{
+							$(ftarget).removeClass(claz);
+							$(this).addClass(claz);
+						}
+
+			            if(callback){
+			            	callback();
+			            }
+			        });
+				}else{
+					thiz.log("togClass","依赖jquery");
+				}
+			}
+		};
+
+		/**
+		 * @desc 可复用的心跳任务
+		 * @params mili->每次心跳的时间
+		 */
+		this.THEART = function(milli){
+			var index = null;
+			this.start = function(callback){
+				index = window.setInterval(callback,milli);
+				callback(index);
+			};
+			this.stop = function(){
+				window.clearInterval(index);
+			};
+		};
+
+		/**
+		 * @desc 可复用的定时任务
+		 * @params mili->每次定时的时间
+		 */
+		this.TOUT = function(milli){
+			var index = null;
+			this.start = function(callback){
+				index = window.setTimeout(callback,milli);
+				callback(index);
+			};
+			this.stop = function(){
+				window.clearTimeout(index);
+			};
+		};
+
+		/**
+		 * @desc 可复用的倒计时
+		 * @params sec->倒计时时间
+		 */
+		this.COUNTDOWN = function(sec){
+		 	var time = sec;
+		 	var index = null;
+		 	this.start = function(callback){
+		 		if(time>0){
+		 			index = window.setInterval(function(){
+		 				time --;
+			          	if(callback){callback(index,time);}
+			          	if(time == 0){
+			            	window.clearInterval(index);
+			            }
+		 			},1000);
+		 		}
+		 	};
+		 	this.stop = function(){
+				window.clearInterval(index);
+			};
+		};
 
 	    /**
 		 * @desc 十六进制颜色转为RGB

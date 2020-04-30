@@ -1,0 +1,11 @@
+
+$padding : 0px;
+
+*{
+	padding: $padding;
+}
+.bg{
+	width:100px;
+	height:100px;
+	background:url('../assets/logo_new.jpg');
+}

@@ -22,6 +22,13 @@ module.exports = {
         })
 			},
 			{
+				test: /\.less$/,
+				use: ExtractTextWebpackPlugin.extract({
+			    fallback: 'style-loader',
+			    use: ['css-loader', 'less-loader']
+			  })
+			},
+			{
 				test: /\.(gif|jpg|png|svg)/, 
 				use:[
 					{
@@ -32,6 +39,14 @@ module.exports = {
 						}
 					}
 				],
+			},
+			{
+				test: /\.(ttf|eot|svg|woff|woff2)$/,
+				use: [
+					{
+						loader:'url-loader'
+					}
+				]
 			},
 			{
 				test: /\.(html)$/, 

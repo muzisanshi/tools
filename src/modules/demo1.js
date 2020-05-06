@@ -1,5 +1,6 @@
 
 require('../css/demo1.scss');
+require('../assets/font-awesome-4.7.0/scss/font-awesome.scss');
 
 const hello = () => {
 	console.log('hello');

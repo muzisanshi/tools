@@ -2,6 +2,8 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextWebpackPlugin = require("extract-text-webpack-plugin");
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
 	mode:'production',
@@ -70,13 +72,20 @@ module.exports = {
 		]
 	},
 	plugins: [
+		new CleanWebpackPlugin(),
 		new HtmlWebpackPlugin({
 		    title:"tools",
 		    chunks:['demo1'],
-		    filename:'demo1.html',
+		    filename:'index.html',
 		    template:'src/html/demo1.html',
 		    inject:"body",
 		}),
 		new ExtractTextWebpackPlugin('app.css'),
-	]
+		new webpack.NamedModulesPlugin(),// 模块热更新
+		new webpack.HotModuleReplacementPlugin(),// 模块热更新
+	],
+	devServer:{
+		contentBase: path.resolve(__dirname, 'dist'),
+		hot: true,
+	}
 }

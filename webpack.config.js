@@ -8,10 +8,10 @@ const webpack = require('webpack');
 module.exports = {
 	mode:'production',
   entry: {
-		demo1:'./src/modules/demo1.js'
+		demo1:'./src/index.js'
 	},
   output: {
-    filename: '[name].js',
+    filename: 'tools.js',
     path: path.resolve(__dirname, 'dist')
   },
 	module:{

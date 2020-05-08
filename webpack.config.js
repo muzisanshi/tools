@@ -8,7 +8,7 @@ const webpack = require('webpack');
 module.exports = {
 	mode:'production',
   entry: {
-		demo1:'./src/index.js'
+		index:'./src/index.js'
 	},
   output: {
     filename: 'tools.js',
@@ -75,7 +75,7 @@ module.exports = {
 		new CleanWebpackPlugin(),
 		new HtmlWebpackPlugin({
 		    title:"tools",
-		    chunks:['demo1'],
+		    chunks:['index'],
 		    filename:'index.html',
 		    template:'src/html/demo1.html',
 		    inject:"body",

@@ -1,8 +1,8 @@
 
-import test from './modules/common-regexp';
+import regexp from './modules/common-regexp';
 
 const tools = {
-	test,
+	...regexp,
 }
 
 const global = global || window;

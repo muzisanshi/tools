@@ -11,7 +11,7 @@ const tools = {
 	Socket,
 }
 
-const global = window || {};
-if(global) global.tools = tools;
+const g = typeof window === 'undefined' ? global : window;
+if(g) g.tools = tools;
 
 module.exports = tools;

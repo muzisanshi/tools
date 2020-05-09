@@ -1,19 +1,22 @@
 {
-  "name": "tools",
+  "name": "mu-tools",
   "version": "1.0.0",
   "description": "common tools",
-  "main": "index.js",
+  "main": "./src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
-		"dev": "webpack-dev-server --open"
+    "dev": "webpack-dev-server --open"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/muzisanshi/tools.git"
   },
   "keywords": [
-    "tools"
+		"mu-tools",
+    "tools",
+		"toolz",
+		"工具"
   ],
   "author": "muzisanshi",
   "license": "MIT",
@@ -37,6 +40,7 @@
     "font-awesome-webpack": "^0.0.5-beta.2",
     "html-loader": "^1.1.0",
     "html-webpack-plugin": "^4.2.1",
+    "jquery": "^3.5.1",
     "less": "^3.11.1",
     "less-loader": "^6.0.0",
     "node-sass": "^4.14.0",

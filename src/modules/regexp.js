@@ -32,7 +32,7 @@ const gnum = (n,s) => {
 	return new RegExp('^\\d{' + n + ',}$').test(s);
 }
 
-export default {
+module.exports = {
 	test,
 	nnum,
 	gnum,

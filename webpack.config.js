@@ -83,6 +83,12 @@ module.exports = {
 		new ExtractTextWebpackPlugin('app.css'),
 		new webpack.NamedModulesPlugin(),// 模块热更新
 		new webpack.HotModuleReplacementPlugin(),// 模块热更新
+		new webpack.ProvidePlugin({// 配置jquery插件
+			$: 'jquery',
+			jQuery: 'jquery',
+			'window.jQuery': 'jquery',
+			'window.$': 'jquery'
+		}),
 	],
 	devServer:{
 		contentBase: path.resolve(__dirname, 'dist'),

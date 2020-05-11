@@ -77,10 +77,10 @@ module.exports = {
 		    title:"tools",
 		    chunks:['index'],
 		    filename:'index.html',
-		    template:'src/html/demo1.html',
+		    template:'src/html/test.html',
 		    inject:"body",
 		}),
-		new ExtractTextWebpackPlugin('app.css'),
+		new ExtractTextWebpackPlugin('tools.css'),
 		new webpack.NamedModulesPlugin(),// 模块热更新
 		new webpack.HotModuleReplacementPlugin(),// 模块热更新
 		new webpack.ProvidePlugin({// 配置jquery插件

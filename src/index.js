@@ -1,4 +1,7 @@
 
+// 打包样式
+require('./css/index.scss');
+
 const common = require('./modules/common');
 const regexp = require('./modules/regexp');
 const crypto = require('./modules/crypto');

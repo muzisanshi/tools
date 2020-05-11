@@ -1,0 +1,54 @@
+/**
+ * 浏览器默认样式重置
+ */
+@import './config.scss';
+
+*{
+	margin: 0;
+	padding: 0;
+	border: none;
+	outline: none;
+	background:transparent;
+	-webkit-overflow-scrolling: touch;
+}
+
+html{
+	font-size: $r;
+	-webkit-text-size-adjust: 100%;
+}
+
+a,a:link,
+a:visited,
+a:hover,
+a:active{
+	text-decoration:none;
+	color: black;
+}
+
+ol,ul{
+	list-style: none;
+}
+
+::-webkit-input-placeholder{
+	font-size: $p;
+}
+input,
+button,
+textarea{
+	font-size: $p;
+}
+input[type=number]{
+  -moz-appearance:textfield;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button{
+  -webkit-appearance: none;
+}
+
+textarea{
+	resize: none;
+	line-height: $p;
+}
+
+
+

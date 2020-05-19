@@ -2,6 +2,8 @@
  * 常用工具函数
  */
 
+import dotdotdot from 'dotdotdot';
+
 // 获取url参数
 const getUrlParam = (name) => {
 	
@@ -294,6 +296,11 @@ const compareVersion = (oldVer,newVer) => {
 	return hasUpdate;
 }
 
+//超出省略号显示,需要设置元素的高度
+const ellipsis = (selector) => {
+	$(selector).dotdotdot();
+}
+
 module.exports = {
 	getUrlParam,
 	limitDecimal,
@@ -312,4 +319,5 @@ module.exports = {
 	log,
 	copy,
 	compareVersion,
+	ellipsis,
 }

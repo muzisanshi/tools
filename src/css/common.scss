@@ -1,0 +1,41 @@
+@import './mixin.scss';
+
+.single-line{
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
+}
+
+.webkit-multi{
+	@include webkit-multi;
+	
+	&-2line{
+		@include webkit-multi;
+		-webkit-line-clamp: 2;
+	}
+	
+	&-3line{
+		@include webkit-multi;
+		-webkit-line-clamp: 3;
+	}
+}
+
+// 通用隐藏滚动条
+.scroll-out-wrapper{
+	position: relative;
+	overflow: hidden;
+	.scroll-y-in-wrapper{
+		overflow-y: scroll;
+		overflow-x: hidden;
+		position: absolute;
+		left: 0px;
+		top:0px;
+	}
+	.scroll-x-in-wrapper{
+		overflow-y: hidden;
+		overflow-x: scroll;
+		position: absolute;
+		left: 0px;
+		top:0px;
+	}
+}

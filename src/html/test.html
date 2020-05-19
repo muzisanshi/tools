@@ -1,4 +1,4 @@
-<!DOCTYPE >
+<!DOCTYPE html>
 <html>
 	<head>
 		<title>tools</title>
@@ -7,9 +7,44 @@
 	<body>
 		<a href="http://www.baidu.com">百度</a>
 		<input placeholder="请输入姓名" type="number"/>
-		<textarea placeholder="备注"></textarea>
-		<p style="background: red;">你好</p>
-		<p style="background: blue;">你好</p>
+		<p>你好</p>
 		<button>提交</button>
+		<p style="width: 100px;" class="single-line">我去你大爷的大爷的大爷的大爷的</p>
+		<p style="width: 100px;height: 100px;line-height: 25px;" class="dot">我去你大爷的大爷的大爷的大爷的我去你大爷的大爷的大爷的大爷的我去你大爷的大爷的大爷的大爷的</p>
+		
+		<style>
+			.scroll-out-wrapper,.cont{
+				width: 100px;
+				height: 100px;
+			}
+		</style>
+		<div class="scroll-out-wrapper">
+			<div class="scroll-y-in-wrapper">
+				<div class="cont">
+					<p>你大爷的</p>
+					<p>你大爷的</p>
+					<p>你大爷的</p>
+					<p>你大爷的</p>
+					<p>你大爷的</p>
+					<p>你大爷的</p>
+					<p>你大爷的</p>
+					<p>你大爷的</p>
+					<p>你大爷的</p>
+					<p>你大爷的</p>
+					<p>你大爷的</p>
+				</div>
+				
+			</div>
+		</div>
+		
+		<script>
+			document.addEventListener(
+				'DOMContentLoaded',
+				function(){
+					tools.ellipsis('.dot');
+				}
+			)
+		</script>
+		
 	</body>
 </html>

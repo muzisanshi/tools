@@ -1,5 +1,6 @@
 @import './mixin.scss';
 
+// 单行,多行文本省略号
 .single-line{
 	overflow: hidden;
 	text-overflow:ellipsis;
@@ -38,4 +39,52 @@
 		left: 0px;
 		top:0px;
 	}
+}
+
+// flex布局
+.flex-row{
+	display: flex;
+	flex-direction: row;
+}
+.flex-col{
+	display: flex;
+	flex-direction: column;
+}
+.flex-center{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.align-center{
+	display: flex;
+	align-items: center;
+}
+.sp-between{
+	justify-content: space-between;
+}
+.grow{
+	flex-grow: 1;
+}
+.shrink{
+	flex-shrink: 1;
+}
+
+// 定位
+.rel{
+	position: relative;
+}
+.abs{
+	position: absolute;
+}
+.fix{
+	position: fixed;
+}
+.fright{
+	float:right;
+}
+.fleft{
+	float:left;
+}
+.clear{
+	clear: both;
 }

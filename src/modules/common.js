@@ -261,6 +261,20 @@ const log = (mark,msg) => {
 	console.log(`${getDateByStamp()} --------${mk}--------\n\n`,JSON.stringify(ms));
 }
 
+const table = (mark,obj) => {
+	if(obj instanceof Object){
+		console.log(mark);
+		console.table(obj)
+	}
+}
+
+const dir = (mark,obj) => {
+	if(obj instanceof Object){
+		console.log(mark);
+		console.dir(obj)
+	}
+}
+
 // JSON.stringfy实现的深拷贝
 const copy = (target) => {
 	if(!target) return;
@@ -317,6 +331,8 @@ module.exports = {
 	get,
 	remove,
 	log,
+	table,
+	dir,
 	copy,
 	compareVersion,
 	ellipsis,

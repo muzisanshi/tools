@@ -42,6 +42,17 @@
 				'DOMContentLoaded',
 				function(){
 					tools.ellipsis('.dot');
+					
+					window.history.pushState({test:'test'},null,window.location.href + 'test');
+					
+					setTimeout(function(){
+						window.history.pushState({test:'test2'},null,window.location.href + '2');
+					},2000)
+					
+					window.addEventListener('popstate',function(e){
+						tools.log('popstate',e.state)
+					})
+					
 				}
 			)
 		</script>

@@ -2,7 +2,7 @@
  * 常用工具函数
  */
 
-import dotdotdot from 'dotdotdot';
+const dotdotdot = require('dotdotdot');
 
 // 获取url参数
 const getUrlParam = (name) => {

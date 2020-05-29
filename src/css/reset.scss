@@ -1,6 +1,7 @@
 /**
  * 浏览器默认样式重置
  */
+
 @import './config.scss';
 
 *{
@@ -10,6 +11,8 @@
 	outline: none;
 	background:transparent;
 	-webkit-overflow-scrolling: touch;
+	font-style: normal;
+	font-family:Microsoft YaHei,serif,sans-serif;
 }
 
 html{

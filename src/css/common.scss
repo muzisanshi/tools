@@ -86,6 +86,7 @@
 .fleft{
 	float:left;
 }
-.clear{
+.clear::before{
+	content: none;
 	clear: both;
 }

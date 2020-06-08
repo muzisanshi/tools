@@ -253,6 +253,38 @@ const remove = (key) => {
 	}
 }
 
+// 设置cookie
+const setCookie = (name,value,days) => {
+	let d = new Date();
+	d.setTime(d.getTime() + (days*24*60*60*1000));
+	let expires = "expires="+ d.toUTCString();
+	document.cookie = name + "=" + value + ";" + expires + ";path=/";
+}
+
+// 获取cookie
+const getCookie = (name) => {
+	
+	let items = document.cookie.split(';');
+	
+	if(name){
+		let value = null;
+		items.map(it => {
+			if(name === it.split('=')[0]){
+				value = it.split('=')[1];
+			}
+		})
+		return value;
+	}
+	
+	return items.map(it => {
+		return {
+			name:it.split('=')[0],
+			value:it.split('=')[1]
+		}
+	})
+	
+}
+
 // 改良后的log
 const log = (mark,msg) => {
 	let mk = mark || 'log';
@@ -330,6 +362,8 @@ module.exports = {
 	save,
 	get,
 	remove,
+	setCookie,
+	getCookie,
 	log,
 	table,
 	dir,

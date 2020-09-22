@@ -18,3 +18,4 @@ const g = typeof window === 'undefined' ? global : window;
 if(g) g.tools = tools;
 
 module.exports = tools;
+

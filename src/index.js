@@ -1,11 +1,11 @@
 
 // 打包样式
-require('./css/index.scss');
+require('./css/index.scss')
 
-const common = require('./modules/common');
-const regexp = require('./modules/regexp');
-const crypto = require('./modules/crypto');
-const Socket = require('./modules/websocket');
+const common = require('./modules/common')
+const regexp = require('./modules/regexp')
+const crypto = require('./modules/crypto')
+const Socket = require('./modules/websocket')
 
 const tools = {
 	...common,
@@ -14,8 +14,8 @@ const tools = {
 	Socket,
 }
 
-const g = typeof window === 'undefined' ? global : window;
-if(g) g.tools = tools;
+const g = typeof window === 'undefined' ? global : window
+if(g) g.tools = tools
 
-module.exports = tools;
+module.exports = tools
 
